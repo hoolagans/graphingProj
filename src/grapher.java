@@ -30,7 +30,7 @@ public abstract class grapher {
 	abstract boolean clearEdgeMarker(int v1, int v2);
 	abstract boolean markEdge(int v1, int v2);
 	abstract boolean markedEdge(int v1, int v2);
-	
+	abstract boolean[][] getPoints();
 	
 	
 }

@@ -56,6 +56,7 @@ public class AdjMatrix extends grapher{
 		weight = tmpWeight;
 	}
 	public boolean addEdge(int v1, int v2){
+	//	System.out.println(adjMatrix.length);
 		if(adjMatrix.length>v1&&adjMatrix.length>v2){
 		adjMatrix[v1][v2]=true;
 		return true;}
@@ -108,5 +109,8 @@ public class AdjMatrix extends grapher{
 		edgeMark[v1][v2]=false;
 		return true;}
 		return false;
+	}
+	public boolean[][] getPoints(){
+		return adjMatrix;
 	}
 }

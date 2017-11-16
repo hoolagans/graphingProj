@@ -17,7 +17,7 @@ public class CreateGraph {
 		a = a.create();
 		a.addEdge(1, 2);
 		a.addVert();
-		System.out.print(a.neighbors(1, 10));
+			System.out.print(a.neighbors(1, 2));
 	}
 
 }
