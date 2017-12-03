@@ -39,7 +39,7 @@ public class TestGraph extends JFrame
     int choice = 1;
     //GraphADT mat = null;
     grapher mat= null;
-    final int NUMCHOICES = 3;
+    final int NUMCHOICES = 4;
     
     public void createAndShowPoints() {
 
@@ -103,9 +103,27 @@ public class TestGraph extends JFrame
     		choice = (choice+1)%(NUMCHOICES);
     		this.setTitle("Breadth first search");
     	}
+    	else if (choice ==3){
+    		grapher g = new AdjMatrix();
+    		g = g.create();
+    		depthSearch(0, g);
+    		drawing.addGraph(g);
+    		choice = (choice+1)%NUMCHOICES;
+    		this.setTitle("depth first search");
+    		//insert recursive depth first function here
+    	}
 
     }
-
+    	public void depthSearch(int v1,grapher g){
+    		for(int i = 1; i<10;i++){
+    			if(mat.neighbors(v1, i)){
+    				g.addEdge(v1, i);
+    				depthSearch(v1+1,g);
+    			}
+    		}
+    		
+    				
+    	}
     /**
      * driver method for min-point-distance finder
      * @param args -- optional number of points > 0
