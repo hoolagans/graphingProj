@@ -40,7 +40,7 @@ public class TestGraph extends JFrame
     //GraphADT mat = null;
     grapher mat= null;
     final int NUMCHOICES = 4;
-    
+    grapher gr = null;
     public void createAndShowPoints() {
 
     	drawing.clearPoints();
@@ -79,15 +79,20 @@ public class TestGraph extends JFrame
     		
     	}
     	else if (choice == 2){
-    		grapher g = new AdjMatrix();
-    		g = g.create();
+    		gr = new AdjMatrix();
+    		gr =gr.create();
+    		breadthFirst(0);
+    		
+    		//first attempt
+    		/*gr = new AdjMatrix();
+    		gr = gr.create();
     		for(int i = 0; i <10-1;i++){
     			//if(i==0||mat.neighbors(i, i-1)){
     			for(int j = 0; j<10;j++){
     				
     				if(mat.neighbors(i, j)){
-    					g.addEdge(i, j);
-    					g.markVertex(j);
+    					gr.addEdge(i, j);
+    					gr.markVertex(j);
     				}
     				System.out.println(mat.neighbors(i, j));
     				
@@ -95,25 +100,43 @@ public class TestGraph extends JFrame
     			}
     				
     			//}
-    			while(g.markedVertex(i+1)==false){
+    			while(gr.markedVertex(i+1)==false){
 					i++;
-				}
-    		}
-    		drawing.addGraph(g);
+				}*/
+    		//}
+    		drawing.addGraph(gr);
     		choice = (choice+1)%(NUMCHOICES);
     		this.setTitle("Breadth first search");
-    	}
+    }
     	else if (choice ==3){
-    		grapher g = new AdjMatrix();
-    		g = g.create();
-    		depthSearch(0, g);
-    		drawing.addGraph(g);
+    		gr = new AdjMatrix();
+    		gr = gr.create();
+    		depthSearch(0, gr);
+    		drawing.addGraph(gr);
     		choice = (choice+1)%NUMCHOICES;
     		this.setTitle("depth first search");
     		//insert recursive depth first function here
     	}
-
-    }
+    	
+    
+}
+    	
+    	public void breadthFirst(int v){
+    	//gr.markVertex(v);
+    	ArrayList<Integer> a = new ArrayList<Integer>();
+    	gr.markVertex(v);
+    	for(int i = 1;i<10;i++){
+    		if(mat.neighbors(v,i)&&mat.markedVertex(i)==false){
+    			gr.markVertex(i);
+    			gr.addEdge(v,i);
+    			a.add(i);
+    			
+    		}
+    	}
+    	if(a.size()>0){
+    	breadthFirst(a.remove(0));}
+    	}
+    		
     	public void depthSearch(int v1,grapher g){
     		for(int i = 1; i<10;i++){
     			if(mat.neighbors(v1, i)){
