@@ -111,7 +111,7 @@ public class TestGraph extends JFrame
     	else if (choice ==3){
     		gr = new AdjMatrix();
     		gr = gr.create();
-    		depthSearch(0, gr);
+    		depthSearch(0);
     		drawing.addGraph(gr);
     		choice = (choice+1)%NUMCHOICES;
     		this.setTitle("depth first search");
@@ -126,7 +126,7 @@ public class TestGraph extends JFrame
     	ArrayList<Integer> a = new ArrayList<Integer>();
     	gr.markVertex(v);
     	for(int i = 1;i<10;i++){
-    		if(mat.neighbors(v,i)&&mat.markedVertex(i)==false){
+    		if(mat.neighbors(v,i)&&gr.markedVertex(i)==false){
     			gr.markVertex(i);
     			gr.addEdge(v,i);
     			a.add(i);
@@ -137,11 +137,13 @@ public class TestGraph extends JFrame
     	breadthFirst(a.remove(0));}
     	}
     		
-    	public void depthSearch(int v1,grapher g){
+    	public void depthSearch(int v1){
+    	gr.markVertex(v1);
     		for(int i = 1; i<10;i++){
-    			if(mat.neighbors(v1, i)){
-    				g.addEdge(v1, i);
-    				depthSearch(v1+1,g);
+    			if(mat.neighbors(v1, i)&&gr.markedVertex(i)==false){
+    				gr.addEdge(v1, i);
+    				gr.markVertex(i);
+    				depthSearch(i);
     			}
     		}
     		
