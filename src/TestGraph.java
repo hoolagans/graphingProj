@@ -39,7 +39,7 @@ public class TestGraph extends JFrame
     int choice = 1;
     //GraphADT mat = null;
     grapher mat= null;
-    final int NUMCHOICES = 1;
+    final int NUMCHOICES = 3;
     
     public void createAndShowPoints() {
 
@@ -58,7 +58,7 @@ public class TestGraph extends JFrame
     			mat.addEdge((int)(10*Math.random()), (int)(10*Math.random()));
     		}
     		drawing.addGraph(mat);
-    		choice = (choice + 1) % (NUMCHOICES+1);
+    		choice = (choice + 1) % (NUMCHOICES);
     		//System.out.println(choice);
     		this.setTitle("Graph Renderer: the graph!");
     	}
@@ -71,11 +71,37 @@ public class TestGraph extends JFrame
     			//for (int j = i+1; j < mat.numVerts(); j += 1)
     		for (int i = 0; i < 10 - 1; i++)
     			for (int j = i+1; j <10; j += 1)
+    				if((int)(Math.random()*100)>50)
     				mat.addEdge(i, j);
     		drawing.addGraph(mat);
-    		choice = (choice + 1) % (NUMCHOICES+1);
+    		choice = (choice + 1) % (NUMCHOICES);
     		this.setTitle("Swell Graph Renderer: AdjMatrixGraph!");
     		
+    	}
+    	else if (choice == 2){
+    		grapher g = new AdjMatrix();
+    		g = g.create();
+    		for(int i = 0; i <10-1;i++){
+    			//if(i==0||mat.neighbors(i, i-1)){
+    			for(int j = 0; j<10;j++){
+    				
+    				if(mat.neighbors(i, j)){
+    					g.addEdge(i, j);
+    					g.markVertex(j);
+    				}
+    				System.out.println(mat.neighbors(i, j));
+    				
+    				
+    			}
+    				
+    			//}
+    			while(g.markedVertex(i+1)==false){
+					i++;
+				}
+    		}
+    		drawing.addGraph(g);
+    		choice = (choice+1)%(NUMCHOICES);
+    		this.setTitle("Breadth first search");
     	}
 
     }

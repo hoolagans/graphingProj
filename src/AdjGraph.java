@@ -127,5 +127,6 @@ public class AdjGraph extends grapher{
 		return adjMatrix;
 		
 	}
+	
 
 }
